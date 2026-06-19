@@ -1,0 +1,33 @@
+class Solution {
+    /**
+     * @param {number[]} nums
+     * @return {number}
+     */
+    longestConsecutive(nums) {
+        if (nums.length === 0) return 0;
+        let n = nums.length;
+        const hs = new Set();
+        for (let num of nums) {
+            hs.add(num);
+        }
+        
+        let maxi = 0;
+        for (let num of nums) {
+            let currNum = num;
+            if (!hs.has(currNum - 1)) {
+                let curr = 1;
+                while (hs.has(currNum + 1)) {
+                    currNum++;
+                    curr += 1;
+                }
+                if (curr > maxi) {
+                    maxi = curr;
+                }
+            } else {
+                continue;
+            }
+        }
+        return maxi;
+        
+    }
+}
